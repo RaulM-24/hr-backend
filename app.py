@@ -14,7 +14,8 @@ app.wsgi_app = ProxyFix(
     x_prefix=1
 )
 
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
+
 
 DATA_FILE = os.path.join("data", "message.json")
 
