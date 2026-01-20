@@ -5,6 +5,13 @@ import json
 import os
 
 app = Flask(__name__)
+
+
+app.config.update(
+    PREFERRED_URL_SCHEME="https"
+)
+
+
 app.wsgi_app = ProxyFix(
     app.wsgi_app,
     x_for=1,
@@ -14,7 +21,7 @@ app.wsgi_app = ProxyFix(
     x_prefix=1
 )
 
-CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
+CORS(app)
 
 
 DATA_FILE = os.path.join("data", "message.json")
